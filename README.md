@@ -1,54 +1,57 @@
-# React + TypeScript + Vite
+<img width="1440" alt="Image" src="https://github.com/user-attachments/assets/0f9018d3-8b67-4b5b-a7e2-3779ff7d6b06" />
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# マインドマップアプリ
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+このプロジェクトでは、Figma 風のマインドマップアプリを構築します。
+親要素ブロックに対し、子要素ブロックを繋げていくことで、関係性を視覚的に表現することができます。
 
-## Expanding the ESLint configuration
+## 学習目標
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Jotai を使用した、グローバルな状態管理について学習します。
+コンポーネント間でのデータ共有、アトムベースの状態管理、ローカルストレージ連携などの実装を確認してください。
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 推奨技術
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+このプロジェクトの難易度と趣旨を踏まえて、以下の使用をお勧めします。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Jotai を用いたグローバルな状態管理
+- React Flow を使用したノードベースのダイアグラム
+- Vite を用いた React 環境構築
+- TypeScript による型チェック
+- Tailwind CSS を用いたスタイリング
+- shadcn/ui を用いたコンポーネント
+- GitHub Pages へのデプロイ
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+---
+
+## 🎯 お題
+
+- 「ユーザーストーリー」を全て満たすアプリを構築してください。
+- 必要に応じて、スクリーンショットやデモサイトの URL を参照してください。
+- スタイルは、あなた自身で独自にカスタマイズすることが可能です。
+
+### 必須機能
+
+1. **マインドマップの基本操作**：
+   - ノードの追加、編集、削除、移動ができる。
+   - ノード間の親子関係を視覚的に表示する。
+2. **コンテンツブロックの作成**：
+   - サイドバーからテキストを入力してブロックを作成できる。
+3. **状態の永続化**：
+   - ブラウザを閉じても内容が保存される。
+4. **リセットボタン**:
+   - 全ての状態をリセットできる。
+
+## ユーザーストーリー
+
+- [ ] ユーザーがサイトにアクセスすると、中央に 1 つ、デフォルトのブロック（ノード）が表示されている。
+- [ ] ノードを選択すると、「子要素を追加・編集・削除」のボタンが表示される。
+- [ ] ユーザーが「子要素を追加」を選択すると、選択中のノードに子ノードを追加できる。
+- [ ] ノードをドラッグして自由に動かして配置できる。
+- [ ] 親ノードと子ノードが線で繋がれて表示される。
+- [ ] サイドバーにテキスト入力フォームがあり、テキストを入力すると、新たな親ノードが作成される。
+- [ ] ページをリロードしても、作成したマインドマップの内容が保持される。
+- [ ] 画面上部に「リセット」ボタンがあり、クリックするとマインドマップを初期状態に戻せる。
+- [ ] アプリケーションが公開されており、誰でもアクセス可能である。
