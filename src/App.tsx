@@ -1,69 +1,59 @@
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Separator } from "@/components/ui/separator";
+import { ReactFlow, Background, Controls, MiniMap } from "@xyflow/react";
+import "@xyflow/react/dist/style.css";
 
-export default function App() {
-  const [open, setOpen] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [textareaValue, setTextareaValue] = useState("");
+import { MindMapNode } from "./components/mind-map-node";
+import { Sidebar } from "./components/sidebar";
+import { Header } from "./components/header";
 
+// カスタムノードタイプを定義
+const nodeTypes = {
+  mindMapNode: MindMapNode,
+};
+
+// 初期ノード
+const initialNodes = [
+  {
+    id: "root",
+    type: "mindMapNode",
+    data: { label: "Main Idea" },
+    position: { x: 250, y: 150 },
+  },
+];
+
+function App() {
   return (
-    <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">shadcn/ui 確認</h1>
-      <div className="space-y-6">
-        <div>
-          <Button variant="default">ボタン</Button>
+    <div className="flex flex-col h-screen">
+      <Header />
+      <div className="flex flex-1 overflow-hidden">
+        <div className="flex-1 h-full bg-[url('/grass-texture.png')] bg-repeat">
+          <ReactFlow
+            nodes={initialNodes}
+            edges={undefined}
+            nodeTypes={nodeTypes}
+            fitView
+            minZoom={0.5}
+            maxZoom={2}
+            nodesDraggable={true}
+            elementsSelectable={true}
+            snapToGrid={true}
+            snapGrid={[15, 15]}
+          >
+            <Background color="#a1a1aa" gap={16} size={1} />
+            <Controls className="bg-white/80 p-1 rounded-md border-2 border-amber-500" />
+            <MiniMap
+              nodeColor={(n) => {
+                if (n.id === "root") return "#f97316";
+                return "#10b981";
+              }}
+              maskColor="rgba(255, 255, 255, 0.5)"
+              className="bg-white/80 rounded-md border-2 border-amber-500"
+            />
+          </ReactFlow>
         </div>
-        <Separator />
-        <div>
-          <Input
-            placeholder="テキストを入力してください"
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            className="mb-2"
-          />
-          <p className="text-sm">入力値: {inputValue}</p>
-        </div>
-        <Separator />
-        <div>
-          <Textarea
-            placeholder="長文を入力してください"
-            value={textareaValue}
-            onChange={(e) => setTextareaValue(e.target.value)}
-            className="mb-2"
-          />
-          <p className="text-sm">入力値: {textareaValue}</p>
-        </div>
-        <Separator />
-        <div>
-          <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger asChild>
-              <Button>ダイアログを開く</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>ダイアログの確認</DialogTitle>
-              </DialogHeader>
-              <DialogFooter>
-                <Button variant="outline" onClick={() => setOpen(false)}>
-                  キャンセル
-                </Button>
-                <Button onClick={() => setOpen(false)}>確認</Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
-        </div>
+        <Sidebar />
       </div>
     </div>
   );
 }
+
+export default App;
