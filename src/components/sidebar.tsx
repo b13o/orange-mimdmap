@@ -3,15 +3,19 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Type } from "lucide-react";
+import { addTextBlockAtom } from "@/store/mind-map-store";
+import { useAtom } from "jotai";
 
 // テキストブロック作成コンポーネント
 const TextBlockCreator = () => {
   const [text, setText] = useState<string>("");
+  const [, onAddBlock] = useAtom(addTextBlockAtom);
 
   const handleAddTextBlock = () => {
-    // 後で実装
-    console.log("テキストブロック追加:", text);
-    setText("");
+    if (text.trim()) {
+      onAddBlock(text);
+      setText("");
+    }
   };
 
   return (
